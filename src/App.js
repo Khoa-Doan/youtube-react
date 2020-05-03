@@ -29,6 +29,7 @@ class App extends React.Component {
     }
 
     render() {
+        const { selectedVideo } = this.state;
         return (
             <Grid justify="center" container spacing={10}>
                 <Grid item xs={12}>
@@ -39,7 +40,7 @@ class App extends React.Component {
                     </Grid>
                     <Grid>
                         <Grid item xs={8}>
-                            <Video />
+                            <Video video={selectedVideo}/>
                         </Grid>
                     </Grid>
                     <Grid>
