@@ -16,7 +16,7 @@ class App extends React.Component {
         const response = await youtubeAPI.get('search', { 
             params: { 
                 part: 'snippet',
-                maxResults: 10,
+                maxResults: 5,
                 key: 'AIzaSyDhVdg-1pa9rD3lxvIUloPwUIp5d14fnGk',
                 q: searchTerm
             } 
@@ -28,8 +28,14 @@ class App extends React.Component {
         });
     }
 
+    onVideoSelect = (video) => {
+        this.setState({
+            selectedVideo: video
+        })
+    }
+
     render() {
-        const { selectedVideo } = this.state;
+        const { selectedVideo, videos } = this.state;
         return (
             <Grid justify="center" container spacing={10}>
                 <Grid item xs={12}>
@@ -37,15 +43,11 @@ class App extends React.Component {
                         <Grid item xs={12}>
                             <SearchBar onFormSubmit={this.handleSubmit}/>
                         </Grid>
-                    </Grid>
-                    <Grid>
                         <Grid item xs={8}>
                             <Video video={selectedVideo}/>
                         </Grid>
-                    </Grid>
-                    <Grid>
                         <Grid item xs={4}>
-                            <VideoList />
+                            <VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
                         </Grid>
                     </Grid>
                 </Grid>
